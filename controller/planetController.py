@@ -5,9 +5,8 @@ from models.planet import PlanetModel
 
 class PlanetController(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument('name', type=str, required=True, help="This field cannot be empity")
-    parser.add_argument('climate', type=str, required=True, help="This field cannot be empity")
-    parser.add_argument('terrain', type=str, required=True, help="This field cannot be empity")
+    parser.add_argument('climate', type=str, required=True, help="This field cannot be empty")
+    parser.add_argument('terrain', type=str, required=True, help="This field cannot be empty")
 
     @jwt_required()
     def get(self, name):
@@ -41,6 +40,8 @@ class PlanetController(Resource):
             planet.delete_from_db()
         except Exception:
             return {'message': 'An error occurred deleting the planet'}, 500
+
+        return {'message': 'Planet deleted'}    
 
 
 class PlanetListController(Resource):

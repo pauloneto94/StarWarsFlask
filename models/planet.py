@@ -23,7 +23,7 @@ class PlanetModel(db.Model):
     def find_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
 
-    def find_nMovies_by_name(cls, name):
+    def find_nMovies_by_name(self, name):
         planetList = requests.get("https://swapi.dev/api/planets/")
         if planetList.status_code == 200:
             for i in range(0, len(planetList.json()['results'])):
@@ -38,5 +38,5 @@ class PlanetModel(db.Model):
         db.session.commit()
 
     def delete_from_db(self):
-        db.session.delete(self
+        db.session.delete(self)
         db.session.commit()    
